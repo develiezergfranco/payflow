@@ -57,7 +57,7 @@ export const dataExtracts = [
         id: '9',
         title: 'Boteco da Vó',
         dueDate: "16/03/21",
-        value: '14,00'
+        value: '54,00'
     },
 ]
 
@@ -105,9 +105,10 @@ function HomePage() {
             </View>
             <View style={styles.relativeContainerContentScreenHomePageFooterText}>
                 <FlatList
-                    data={dataExtracts}
+                    data={dataExtracts} 
                     keyExtractor={(item) => item.id}
                     showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ paddingBottom: 140, flexGrow: 1 }}
                     ItemSeparatorComponent={() => <View style={{ height: 32, flex: 1 }} />}
                     renderItem={({ item }) => (
                         <TouchableOpacity
@@ -141,7 +142,6 @@ function HomePage() {
                 selectedBill={selectedBill}
             />
         </SafeAreaView>
-
     )
 }
 
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     fullScreenHomePage: {
         flex: 1,
         alignItems: 'center',
+        backgroundColor: '#FFFFFF'
     },
     headerContentScreenHomePage: {
         justifyContent: 'flex-start',
@@ -228,8 +229,8 @@ const styles = StyleSheet.create({
         width: 'auto',
         position: 'absolute',
         zIndex: 1,
-        top: 256,
-        left: 24,
+        top: 234,
+        left: 33,
     },
     styleContentScreenHomePageMiddletText: {
         fontSize: 20,
@@ -243,7 +244,7 @@ const styles = StyleSheet.create({
         marginTop: 153,
         paddingTop: 32,
         borderTopWidth: 1,
-        borderTopColor: '#E3E3E5'
+        borderTopColor: '#E3E3E5',
     },
     relativeContainerContentScreenHomePageFooterTextFlatlist: {
         display: 'flex',

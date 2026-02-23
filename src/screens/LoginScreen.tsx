@@ -1,14 +1,37 @@
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { StatusBar } from "expo-status-bar";
 
 export default function LoginPage() {
     const navigation = useNavigation();
     return (
-        <SafeAreaView>
-            <View>
-                <Image source={require('../assets/login/womanbackground.png')}
-                    style={styles.imageWomanBackgoundLogin} />
+        <SafeAreaView style={styles.screenLoginContainerFull}>
+            <StatusBar
+                style="light"
+                backgroundColor="#FF941A"
+                translucent={false}
+            />
+            <View >
+                <View>
+                    <Image
+                        source={require('../assets/login/womanbackground.png')}
+                        style={styles.imageWomanBackgoundLogin}
+                    />
+                    <LinearGradient
+                        colors={[
+                            "rgba(255,255,255,0)",  
+                            "rgba(255,255,255,0.4)",
+                            "rgba(255,255,255,0.8)",
+                            "#FFFFFF"               
+                        ]}
+                        locations={[0, 0.1, 0.35, 0.8]}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        style={styles.gradientOverlay}
+                    />
+                </View>
                 <View>
                     <Image source={require('../assets/login/lefticon.png')}
                         style={styles.imageLefttIconeBackgoundLogin} />
@@ -21,7 +44,6 @@ export default function LoginPage() {
                     <Image source={require('../assets/login/righticon.png')}
                         style={styles.imageRightIconeBackgoundLogin} />
                 </View>
-                <View style={styles.imageGradientWomanBackgoundLogin}></View>
             </View>
             <View style={styles.textFooterScreenLoginQr}>
                 <View style={styles.imageBarcodeIconeBackgoundLogin}>
@@ -51,6 +73,10 @@ export default function LoginPage() {
 }
 
 const styles = StyleSheet.create({
+    screenLoginContainerFull: {
+        flex: 1,
+        backgroundColor: '#FFFFFFCC'
+    },
     imageBackgoundLogin: {
         width: 'auto',
         height: 270,
@@ -84,15 +110,12 @@ const styles = StyleSheet.create({
         height: 44,
         width: 72,
     },
-    imageGradientWomanBackgoundLogin: {
-        zIndex: 1,
-        backgroundColor: '#FFFFFFCC',
+    gradientOverlay: {
+        zIndex: 2,
         position: 'absolute',
         top: 299,
-        left: 87,
-        width: 200,
+        width: '100%',
         height: 89,
-        opacity: 0.3,
     },
     textFooterScreenLoginQr: {
         position: 'absolute',
@@ -138,7 +161,7 @@ const styles = StyleSheet.create({
         paddingLeft: 49,
         fontSize: 15,
         fontWeight: 400,
-        color: '##666666'
+        color: '#666666'
     },
     googleLoginScreenIconStyle: {
         display: 'flex',

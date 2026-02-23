@@ -7,11 +7,12 @@ import {
 } from "react-native";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Svg, { Line } from 'react-native-svg'
+import { useNavigation } from '@react-navigation/native';
 
 type ModalPaymentProps = {
     ModalVisible: boolean,
     setModalVisible: (value: boolean) => void,
-    selectedBill: any
+    selectedBill: any   
 }
 
 export function ModalPayment({
@@ -19,16 +20,22 @@ export function ModalPayment({
     setModalVisible,
     selectedBill
 }: ModalPaymentProps) {
+    const navigation = useNavigation();
 
     if (!selectedBill) return null;
 
+    const handleCloseAndGoHome = () => {
+        setModalVisible(false);
+    };
+
     return (
         <Modal
-            animationType="slide"
-            transparent={true}
-            visible={ModalVisible}
-            onRequestClose={() => setModalVisible(false)}
-        >
+    animationType="slide"
+    transparent
+    visible={ModalVisible}
+    statusBarTranslucent
+    onRequestClose={() => setModalVisible(false)}
+>
             <TouchableOpacity
                 style={styles.overlay}
                 activeOpacity={1}
@@ -37,7 +44,7 @@ export function ModalPayment({
                 <TouchableOpacity
                     activeOpacity={1}
                     style={styles.modalContainer}
-                    onPress={() => { }} // impede propagação
+                    onPress={() => { }}
                 >
                     <View style={styles.modalContainerPaymentTexts}>
                         <Text style={styles.modalContainerRegularText}>O boleto
@@ -49,19 +56,13 @@ export function ModalPayment({
                     <View style={styles.modalContainerButtons}>
                         <TouchableOpacity
                             style={styles.modalContainerNotButton}
-                            onPress={() => {
-                                alert("Pagamento não realizado!");
-                                setModalVisible(false);
-                            }}
+                            onPress={handleCloseAndGoHome}
                         >
                             <Text style={styles.modalContainerNotTextButton}>Ainda não</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.modalContainerYesButton}
-                            onPress={() => {
-                                alert("Pagamento realizado!");
-                                setModalVisible(false);
-                            }}
+                            onPress={handleCloseAndGoHome}
                         >
                             <Text style={styles.modalContainerYesTextButton}>Sim</Text>
                         </TouchableOpacity>
@@ -78,16 +79,16 @@ export function ModalPayment({
                             />
                         </Svg>
                     </View>
-                    <View style={styles.modalContainerButtonsDelete}>
-                        <FontAwesome5 name="trash-alt" size={20} color="#E83F5B" />
-                        <View>
-                            <TouchableOpacity
-                                onPress={() => setModalVisible(false)}
-                            >
+                    <TouchableOpacity
+                        onPress={() => setModalVisible(false)}
+                    >
+                        <View style={styles.modalContainerButtonsDelete}>
+                            <FontAwesome5 name="trash-alt" size={20} color="#E83F5B" />
+                            <View>
                                 <Text style={styles.modalContainerButtonsDeleteText}>Deletar boleto</Text>
-                            </TouchableOpacity>
+                            </View>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 </TouchableOpacity>
             </TouchableOpacity>
         </Modal>
@@ -97,15 +98,12 @@ export function ModalPayment({
 const styles = StyleSheet.create({
     overlay: {
         flex: 1,
-        width: '100%',
         backgroundColor: "rgba(0,0,0,0.5)",
         justifyContent: "flex-end",
     },
     modalContainer: {
         backgroundColor: "#FFF",
         width: "100%",
-        paddingHorizontal: 24,
-        height: 293,
         paddingTop: 38,
         alignItems: 'center',
     },
@@ -158,11 +156,12 @@ const styles = StyleSheet.create({
     },
     modalContainerButtonsDelete: {
         display: 'flex',
-        width: 135,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingTop: 16,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 41,
+        gap: 16
     },
     modalContainerButtonsDeleteText: {
         fontSize: 15,

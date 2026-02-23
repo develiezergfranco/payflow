@@ -3,7 +3,6 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { StatusBar } from "expo-status-bar";
 
 export default function ExtractPage() {
-
     const data = [
         {
             id: '1',
@@ -92,6 +91,7 @@ export default function ExtractPage() {
                     data={data}
                     keyExtractor={(item) => item.id}
                     showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ paddingBottom: 140, flexGrow: 1 }}
                     ItemSeparatorComponent={() => <View style={{ height: 31, flex: 1 }} />}
                     renderItem={({ item }) => (
                         <View style={styles.relativeContainerContentScreenExtractPageFooterTextFlatlist}>
@@ -114,12 +114,13 @@ const styles = StyleSheet.create({
     fullScreenExtractPage: {
         flex: 1,
         alignItems: 'center',
+        backgroundColor: '#FFFFFF'
     },
     headerContentExtractHomePage: {
         padding: 24,
         display: 'flex',
         flexDirection: 'row',
-        height: 152,
+        height: 106,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: 327,
-        paddingTop: 32
+        paddingTop: 32,
     },
     relativeContainerContentScreenExtractPageFooterTextFlatlist: {
         display: 'flex',
